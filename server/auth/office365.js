@@ -23,7 +23,6 @@ if (process.env.OFFICE365_ISSUER) {
       redirect_uris: [`${process.env.URL}/auth/office365.callback`],
       response_types: ['token', 'id_token']
     })
-    console.log("Issuer found,client initialised", !!client);
   }).catch((err) => {
     console.error("failed to initialise Office365 Client",err);
     // $FlowFixMe
@@ -51,9 +50,7 @@ router.get("office365", async ctx => {
 
 // signin callback from OIDC
 router.post("office365.callback", auth({ required: false }), async ctx => {
-  console.log(ctx.inspect());
   const params = client.callbackParams(ctx);
-  console.log("Params", params);
   if(params.error){
     ctx.redirect("/?notice=auth-error&error=idp-respose");
     return;
@@ -66,7 +63,6 @@ router.post("office365.callback", auth({ required: false }), async ctx => {
     }
     let tokenSet = await client.callback(`${process.env.URL}/auth/office365.callback`, params, { nonce })
     let profile = await client.userinfo(tokenSet);
-    console.log("profile info", profile);
     debugger;
     let domain = profile.email.substring(profile.email.lastIndexOf('@') + 1);
     // allow all domains by default if the env is not set
