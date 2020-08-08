@@ -11,13 +11,14 @@ import { Team } from "../models";
 import slack from "./slack";
 import google from "./google";
 import email from "./email";
-
+import office365 from "./office365";
 const app = new Koa();
 const router = new Router();
 
 router.use("/", slack.routes());
 router.use("/", google.routes());
 router.use("/", email.routes());
+router.use("/", office365.routes());
 
 router.get("/redirect", auth(), async ctx => {
   const user = ctx.state.user;

@@ -27,6 +27,14 @@ if (process.env.SLACK_KEY) {
   });
 }
 
+if (process.env.OFFICE365_ISSUER) {
+  services.push({
+    id: "office365",
+    name: "Office 365",
+    authUrl: signin("office365"),
+  });
+}
+
 services.push({
   id: "email",
   name: "Email",
@@ -41,6 +49,9 @@ function filterServices(team) {
   }
   if (team && !team.slackId) {
     output = reject(output, service => service.id === "slack");
+  }
+  if (team && !team.office365Id) {
+    output = reject(output, service => service.id === "office365");
   }
   if (!team || !team.guestSignin) {
     output = reject(output, service => service.id === "email");

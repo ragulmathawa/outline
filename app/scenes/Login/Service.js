@@ -6,6 +6,7 @@ import { client } from "utils/ApiClient";
 import ButtonLarge from "components/ButtonLarge";
 import SlackLogo from "components/SlackLogo";
 import GoogleLogo from "components/GoogleLogo";
+import Office365Logo from "components/Office365Logo";
 import InputLarge from "components/InputLarge";
 
 type Props = {
@@ -106,6 +107,10 @@ class Service extends React.Component<Props, State> {
       ) : id === "google" ? (
         <Logo>
           <GoogleLogo size={16} />
+        </Logo>
+      ) : id ==="office365" ? (
+        <Logo>
+          <Office365Logo size={16} />
         </Logo>
       ) : (
         undefined
