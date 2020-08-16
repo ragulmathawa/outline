@@ -1,13 +1,13 @@
 // @flow
+import { EmailIcon } from "outline-icons";
 import * as React from "react";
 import styled from "styled-components";
-import { EmailIcon } from "outline-icons";
-import { client } from "utils/ApiClient";
 import ButtonLarge from "components/ButtonLarge";
-import SlackLogo from "components/SlackLogo";
 import GoogleLogo from "components/GoogleLogo";
 import Office365Logo from "components/Office365Logo";
 import InputLarge from "components/InputLarge";
+import SlackLogo from "components/SlackLogo";
+import { client } from "utils/ApiClient";
 
 type Props = {
   id: string,
@@ -73,7 +73,7 @@ class Service extends React.Component<Props, State> {
             onSubmit={this.handleSubmitEmail}
           >
             {this.state.showEmailSignin ? (
-              <React.Fragment>
+              <>
                 <InputLarge
                   type="email"
                   name="email"
@@ -88,12 +88,12 @@ class Service extends React.Component<Props, State> {
                 <ButtonLarge type="submit" disabled={this.state.isSubmitting}>
                   Sign In →
                 </ButtonLarge>
-              </React.Fragment>
+              </>
             ) : (
-              <ButtonLarge type="submit" icon={<EmailIcon />} fullwidth>
-                Continue with Email
-              </ButtonLarge>
-            )}
+                <ButtonLarge type="submit" icon={<EmailIcon />} fullwidth>
+                  Continue with Email
+                </ButtonLarge>
+              )}
           </Form>
         </Wrapper>
       );
@@ -108,13 +108,13 @@ class Service extends React.Component<Props, State> {
         <Logo>
           <GoogleLogo size={16} />
         </Logo>
-      ) : id ==="office365" ? (
+      ) : id === "office365" ? (
         <Logo>
           <Office365Logo size={16} />
         </Logo>
       ) : (
-        undefined
-      );
+              undefined
+            );
 
     return (
       <Wrapper key={id}>
